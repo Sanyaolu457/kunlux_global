@@ -1,0 +1,26 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="product-detail">
+  <div class="product-image">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+  </div>
+  <div class="product-info">
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <div class="price">&#8358;{{ product.price }}</div>
+    
+    {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cart-btn">Add to Cart</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="login-btn">Login to Add</a>
+            {% endif %}         
+    <a href="{% url 'pages_newarrivals' %}" class="btn-back">← Back to Products</a>
+  </div>
+</div>
+{% endblock %}

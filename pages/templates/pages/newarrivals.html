@@ -1,0 +1,24 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="latest-arrivals">
+        
+        <h2>Latest Arrivals</h2>
+        <div class="arrival-container">
+            {%for product in products %}
+               <div class="arrival-card">
+                   <a href="{% url 'product_detail' product.id %}"><img src="{{ product.image.url }}" alt="" srcset=""></a>
+                   <h3>{{ product.name }}</h3>
+                   <p>&#8358;{{ product.price }}</p>  
+                   <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">Add to Cart</a>           
+                </div>
+
+                {% empty %}
+                <p>No new products available yet.</p>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+    </section>
+{% endblock content %}

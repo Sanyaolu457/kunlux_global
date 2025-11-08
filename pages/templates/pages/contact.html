@@ -1,0 +1,52 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="contact-page">
+    <div class="contact-header">
+        <h1>Contact Us</h1>
+        <p>We’re here to help — reach out for inquiries, collaborations, or wholesale orders.</p>
+    </div>
+
+    <div class="contact-box">
+        <div class="contact-info">
+            <h2>Our Office</h2>
+            <p><i class="fa fa-map-marker-alt"></i> 184 Kemta Oloko, Sapon, Abeokuta, Ogun State</p>
+            <p><a href="tel:+2349071009767" class="cont"><i class="fa fa-phone"></i>+234 907 100 9767</a></p>
+            <p><a href="mailto:kunluxglobal@gmail.com"><i class="fa fa-envelope"></i>kunluxglobal@gmail.com</a></p>
+            <p><i class="fa fa-clock"></i> Mon - Sat: 8:00 AM - 6:00 PM</p>
+
+            <div class="social-links">
+                <a href="https://tiktok.com/@pe_lu_mi5" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://instagram.com/black_stem2" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://wa.me/2349071009767" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://snapchat.com/@blackstem24" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="">Full Name*</label>
+                <input type="text" name="name" required>
+                <label for="">Phone Number*</label>
+                <input type="phone" name="phone_number" required>
+                <label for="">Email*</label>
+                <input type="email" name="email" required>
+                <label for="">Your Message*</label>
+                <textarea name="message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="map" style="margin-top: 70px;">
+        <iframe 
+            src="https://www.google.com/maps?q=Abeokuta%20Ogun%20State&output=embed"
+            loading="lazy">
+        </iframe>
+    </div>
+</section>
+
+{% endblock %}

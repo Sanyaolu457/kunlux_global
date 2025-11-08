@@ -1,0 +1,57 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="about-section">
+    <h1>About Us</h1>
+
+    <div class="about-container">
+        <div class="about-highlight">
+            <p>
+                <strong style="color: rgba(65, 33, 94, 0.904);">Kunlux Global</strong> is your trusted destination for premium-quality rubber slippers, crocs, and casual footwear designed for comfort, durability, and everyday style.  
+                We’re proud to bring you products that combine local craftsmanship with modern global trends.
+            </p>
+        </div>
+
+        <div class="about-highlight">
+            <h2>Our Mission</h2>
+            <p>
+                To provide high-quality, stylish, and affordable slippers that ensure comfort with every step.
+                We aim to make comfortable footwear accessible to everyone, without compromising on design or durability.
+            </p>
+        </div>
+
+        <div class="about-highlight">
+            <h2>Our Vision</h2>
+            <p>
+                To become one of Africa’s most trusted footwear brands, known for delivering innovation, comfort, and lasting value — one step at a time.
+            </p>
+        </div>
+
+        <div class="about-highlight about-list">
+            <h2>Why Choose Us</h2>
+            <ul>
+                <li>Soft, long-lasting rubber materials</li>
+                <li>Stylish designs for men, women, and kids</li>
+                <li>Affordable prices with premium quality</li>
+                <li>Fast delivery and easy returns</li>
+                <li>Friendly, customer-first support</li>
+            </ul>
+        </div>
+
+        <div class="about-highlight">
+            <h2>Our Story</h2>
+            <p>
+                Kunlux Global began as a small passion for comfortable and affordable slippers — created for friends, family, and the everyday person.  
+                Today, that small dream has grown into a brand trusted by customers across Nigeria, known for quality and comfort in every pair.
+            </p>
+        </div>
+
+        <div class="about-cta">
+            <p>Ready to step into comfort?</p>
+            <a href="{% url 'pages_newarrivals' %}">Shop New Arrivals</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

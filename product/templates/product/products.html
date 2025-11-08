@@ -1,0 +1,30 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="latest-arrivals">
+        <h2>Latest Arrivals</h2>
+        <div class="arrival-container">
+        {% for product in products %}
+        <div class="arrival-card">
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>&#8358;{{ product.price }}</p>   
+            
+            {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="cart-btn">Add to Cart</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="login-btn">Login to Add</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    </section>
+{% endblock content%}

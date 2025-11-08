@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/22f20fbc44.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/slippers.css' %}">
+    {% if title %}
+       <title>KUNLUX GLOBAL - {{title}}</title>
+    {% else %}
+       <title> KUNLUX GLOBAL</title>
+    {% endif %}
+    
+</head>
+<body>
+    <header>
+        <div class="contact-container">
+           <div class="left-section">
+           <a href="tel:+2349071009767"><i class="fa fa-phone"></i>+234 907 100 9767</a>
+           <a href="mailto:kunluxglobal@gmail.com"><i class="fa fa-envelope"></i>info@kunluxglobal@gmail.com</a>
+        </div>
+
+        <div class="right-section">
+           <a href="https://tiktok.com/@pe_lu_mi5" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+           <a href="https://instagram.com/black_stem2" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+           <a href="https://wa.me/2349071009767" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+           <a href="https://snapchat.com/@blackstem24" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+        </div>
+        </div>
+
+        <div class="header-container">
+            <div class="kglobal">
+                <span class="kglobal-main">KUNLUX</span> 
+                <span class="kglobal-sub">GLOBAL</span>
+            </div>
+
+            <div class="search-container">
+                <input type="search" placeholder="search...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="cart">
+                <a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i></a> 
+            </div>
+
+            {% if user.is_authenticated %}
+                <div class="profile user-menu">
+                <div class="user-icon" id="userIcon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Welcome, {{ user.username|title }}</span>
+                    </div>
+                    <hr>
+                    <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
+                    <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
+                    <a href="#"><i class="fa-solid fa-box"></i> Orders</a>
+                    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </div>
+                </div>
+            {% else %}
+                <div class="profile">
+                <a href="{% url 'login' %}"><i class="fa-solid fa-user"></i></a>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+        <div class="header3">
+            <div class="product-category">
+                <p>Product Categories</p>
+            </div>
+
+            <div class="nav-container">
+                <ul>
+                    <li><a href="{% url 'pages_home' %}"  class="{% if request.resolver_match.url_name == 'pages_home' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'pages_about' %}"  class="{% if request.resolver_match.url_name == 'pages_about' %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'pages_newarrivals' %}"  class="{% if request.resolver_match.url_name == 'pages_newarrivals' %}active{% endif %}">New Arrivals</a></li>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="{% url 'pages_contact' %}" class="{% if request.resolver_match.url_name == 'pages_contact' %}active{% endif %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    {% block content %} {% endblock %}
+    </main>
+
+    <footer class="footer-section">
+        <div class="footer-container">
+           <div class="footer contact">
+                 <h4>KUNLUX <br class="global">GLOBAL</h4>
+               <ul>
+                  <li><i class="fa fa-map-marker-alt"></i> 184 Kemta Oloko,Sapon,Abeokuta,Ogun State</li>
+                  <li><a href="mailto:kunluxglobal@gmail.com" class="cont"><i class="fa fa-envelope"></i>kunluxglobal@gmail.com</a></li>
+                  <li><a href="tel:+2349071009767" class="cont"><i class="fa fa-phone"></i>+234 907 100 9767</a></li>
+               </ul>
+
+             <div class="socials">
+                   <a href="https://tiktok.com/@pe_lu_mi5" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                   <a href="https://instagram.com/black_stem2" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                   <a href="https://wa.me/2349071009767" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                   <a href="https://snapchat.com/@blackstem24" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+             </div>
+               
+            </div>
+
+            <div class="footer categories">
+                <h4>Categories</h4>
+                <ul>
+                  <li><a href="#">Men</a></li>
+                  <li><a href="#">Women</a></li> 
+                  <li><a href="#">Children</a></li>
+                  <li><a href="#">Crocs</a></li>
+                  <li><a href="#">Shoes</a></li>
+                </ul>
+            </div>
+
+            <div class="footer quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                  <li><a href="{% url 'pages_newarrivals' %}">New Arrivals</a></li>
+                  <li><a href="#">All Products</a></li>
+                  <li><a href="#">My Account</a></li>
+                  <li><a href="#">Store Location</a></li>
+                  <li> <a href="#">FAQS</a></li>  
+                </ul>
+            </div>
+
+            <div class="footer information">
+                <h4>Information</h4>
+                <ul>
+                  <li><a href="{% url 'pages_about' %}">About Us</a></li>
+                  <li><a href="{% url 'pages_contact' %}">Contact Us</a></li>
+                  <li><a href="#">Terms and Conditions</a></li>
+                  <li><a href="#">Return & Exchanges</a></li>
+                  <li><a href="#">Shipping & Delivery</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer newsletter">
+               <h4>Newsletter</h4>
+                <p>Subscribe to our newsletter and get 10% off your first purchase</p> 
+                
+                <form action="" class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>   
+        </div>  
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const userIcon = document.getElementById('userIcon');
+        const dropdown = document.getElementById('userDropdown');
+
+        if (!userIcon || !dropdown) return;
+
+        userIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target) && !userIcon.contains(e.target)) {
+            dropdown.classList.remove('show');
+            }
+        });
+        });
+   </script>
+</body>
+</html>

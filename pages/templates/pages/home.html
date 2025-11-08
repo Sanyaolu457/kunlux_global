@@ -1,0 +1,62 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+
+{% block content %}
+</style>
+
+
+    <section>
+       <div class="hero-section">
+        <img src="{% static 'images/istockphoto-2223982537-612x612.jpg' %}" alt="" srcset="" class="hero-image">
+        {% if user.is_authenticated %}
+        <div class="hero-text">
+            <h2>Quality Rubber Slippers At Kunlux Global </h2>
+            <p>We offer quality rubber slippers and footwear for men, women and children affordable prices.</p>
+            <a class="hero-btn">Shop Now</a>
+        </div>
+        {% else %}
+        <div class="hero-text">
+            <h2>Quality Rubber Slippers At Kunlux Global </h2>
+            <p>We offer quality rubber slippers and footwear for men, women and children affordable prices.</p>
+            <a class="hero-btn">Shop Now</a>
+        </div>
+        {% endif %}
+    </div>
+    </section>
+
+    <section class="latest-arrivals">
+        <h2>Latest Arrivals</h2>
+        <div class="arrival-container">
+            {%for product in products %}
+               <div class="arrival-card">
+                   <a href="{% url 'product_detail' product.id %}"><img src="{{ product.image.url }}" alt="" srcset=""></a>
+                   <h3>{{ product.name }}</h3>
+                   <p>&#8358;{{ product.price }}</p>  
+
+                   <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">Add to Cart</a>           
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'pages_newarrivals' %}" class="seemore-btn">See More</a>
+    </section>
+
+    <!-- <section class="section3">
+       <h3>CATEGORIES</h3>
+       <div class="categories-container">
+          <div class="men-category">
+
+          </div>
+
+          <div class="women-category">
+
+          </div>
+
+          <div class="children-category">
+
+          </div>
+       </div>
+    </section> -->
+        
+{% endblock %}
