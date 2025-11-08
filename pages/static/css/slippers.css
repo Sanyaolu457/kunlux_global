@@ -8,16 +8,22 @@ header{
     background: white;
 }
 
+.contact-container,
+.header-container,
+.header3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
 .contact-container{
     background-color: black;
     color: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
     height: 50px;
     gap: 2px;
-    padding: 0 30px 0 30px;
+    padding: 0 20px 0 20px;
 }
 
 
@@ -52,19 +58,12 @@ header{
 }
 
 .header-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     gap: 10px;
-    align-items: center;
     padding: 0 15px;
     height: 100px;
     margin-bottom: 0;
     border-bottom: 1px solid rgba(128, 128, 128, 0.507);
 }
-
-
-
 
 .kglobal{
    display: flex;
@@ -104,7 +103,7 @@ header{
 
 .search-container input{
     width: 100%;
-    padding: 10px 10px 10px 8px;
+    padding: 20px 10px 20px 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
@@ -148,11 +147,17 @@ header{
 
 .profile{
    white-space: nowrap;
-   margin-left: 5px;
+   margin-left: 10px;
    box-shadow: 3px 3px 4px #eee,
                -4px -4px 4px #eee; 
-    padding: 10px; 
-    text-align: center;
+   text-align: center;
+   cursor: pointer;
+  color: rgba(117, 50, 179, 0.685);
+  font-size: 28px;
+  border: 2px solid white;
+  border-radius: 50%;
+  padding: 6px 10px;
+  transition: background 0.3s, color 0.3s;
 }
 
 .user-menu {
@@ -160,15 +165,6 @@ header{
   display: inline-block;
 }
 
-.user-icon {
-  cursor: pointer;
-  color: rgba(117, 50, 179, 0.685);
-  font-size: 23px;
-  border: 2px solid white;
-  border-radius: 50%;
-  padding: 6px 9px;
-  transition: background 0.3s, color 0.3s;
-}
 .user-icon:hover {
   background: white;
   color: blueviolet;
@@ -246,11 +242,11 @@ header{
     }
 
 .header3{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-top: 0;
     z-index: 200;
+    position: relative;
+
+
 }
 
 .product-category{
@@ -271,7 +267,7 @@ header{
 }
 
 .nav-container{
-   display: flex;
+   display: none;
    flex: 1;
    justify-content: center;
    align-items: center;
@@ -322,6 +318,80 @@ header{
     width: 0;
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+@media (min-width: 769px) {
+  .nav-container {
+    display: flex;
+  }
+
+  .nav-container ul {
+    flex-direction: row;
+  }
+
+  .menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+}
+
+@media (max-width: 768px) {
+  .header3{
+    margin-top: 40px;
+  }
+
+  .product-category{
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    color: rgba(117, 50, 179, 0.685);
+    right: 30px;
+    margin-top: 10px;
+    bottom: 0;
+    z-index: 999;
+  }
+
+  .nav-container {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .nav-container.active {
+    display: block;
+  }
+
+  .nav-container ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .nav-container ul li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .nav-container ul li:first-child {
+    border-top: none;
+
+  }
+}
+
 .hero-section{
     position: relative;
     display: inline-block;
@@ -350,13 +420,13 @@ header{
     z-index: 2;
 
     @media (max-width: 900px) {
-        left: 50%;
-        width: 430px;
+        left: 55%;
+        width: 400px;
     }
 }
 
 .hero-text h2{
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
     line-height: 50px;
 }
@@ -412,6 +482,7 @@ header{
     font-weight: 700;
     font-size: 2.5em;
     font-style: italic;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -431,9 +502,9 @@ header{
     background: white;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
     padding: 20px;
-    margin: 0 20px 0 20px;
+    margin: 0 5px 0 5px;
     overflow: hidden;
 
     @media (max-width: 1200px) {
@@ -445,7 +516,7 @@ header{
     background: transparent;
     border-radius: 3px;
     text-align: center;
-    padding: 15px;
+    padding: 7px;
     box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -457,7 +528,7 @@ header{
 
     @media (max-width: 680px) {
         width: 160px;
-        height: 180px;
+        height: 130px;
     }
 
     @media (min-width: 681px) {
@@ -569,7 +640,8 @@ header{
     margin: 0 auto;
 
     @media (max-width: 768px) {
-        width: 350px;
+        width: 360px;
+        margin-left: 10px;
     }
 }
 
@@ -712,8 +784,9 @@ header{
 }
 
 .contact-info {
+    overflow: hidden;
     flex: 1;
-    min-width: 340px;
+    min-width: 300px;
     background: rgba(105, 88, 122, 0.479);
     padding: 60px 20px;
     border-radius: 30px;
@@ -758,13 +831,14 @@ header{
 
 .contact-form {
     flex: 1;
-    min-width: 340px;
+    min-width: 300px;
     background: rgba(105, 88, 122, 0.479);
     padding: 20px;
     border-radius: 30px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1),
                 -2px -2px 6px rgba(0, 0, 0, 0.1);
     transition: 0.4s ease;
+    overflow: hidden;
 }
 
 .contact-form:hover {
@@ -851,7 +925,7 @@ header{
 }
 
 .cart-container {
-  margin-top: 60px;
+    margin-top: 60px;
     margin-bottom: 50px;
     border-radius: 20px;
     overflow: hidden;
@@ -899,7 +973,7 @@ header{
 
 .cart-btn, .login-btn {
     margin-top: 15px;
-    background-color: #6610f2;
+    background-color: blueviolet;
     color: #fff;
     border-radius: 10px;
     padding: 15px 20px;

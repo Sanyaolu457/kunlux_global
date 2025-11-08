@@ -77,7 +77,12 @@
                 <p>Product Categories</p>
             </div>
 
-            <div class="nav-container">
+            <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+            </div>
+
+
+            <div class="nav-container" id="navContainer">
                 <ul>
                     <li><a href="{% url 'pages_home' %}"  class="{% if request.resolver_match.url_name == 'pages_home' %}active{% endif %}">Home</a></li>
                     <li><a href="{% url 'pages_about' %}"  class="{% if request.resolver_match.url_name == 'pages_about' %}active{% endif %}">About</a></li>
@@ -159,6 +164,18 @@
     </footer>
 
     <script>
+         document.addEventListener('DOMContentLoaded', function () {
+         const menuToggle = document.getElementById('menuToggle');
+         const navContainer = document.getElementById('navContainer');
+ 
+         menuToggle.addEventListener('click', function () {
+         navContainer.classList.toggle('active');
+         const icon = this.querySelector('i');
+         icon.classList.toggle('fa-bars');
+         icon.classList.toggle('fa-times');
+        });
+      });
+
         document.addEventListener('DOMContentLoaded', function() {
         const userIcon = document.getElementById('userIcon');
         const dropdown = document.getElementById('userDropdown');
