@@ -1,0 +1,179 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+.checkout-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(37, 19, 54, 0.61);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.checkout-container h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.order-summary {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-summary th, .order-summary td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    text-align: left;
+}
+
+.order-summary th {
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.total-line {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-top: 15px;
+}
+
+.checkout-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.checkout-form input, 
+.checkout-form textarea, 
+.checkout-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 5px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 14px;
+}
+
+.checkout-form input::placeholder, 
+.checkout-form textarea::placeholder {
+    color: #ddd;
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #9b59b6;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+}
+
+.checkout-btn:hover {
+    background: #8e44ad;
+    transform: scale(1.03);
+}
+
+.messages {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.message.success { background: #28a745; color: white; }
+.message.error { background: #dc3545; color: white; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+    <div class="message {{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-summary">
+        <h3>Order Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>&#8358;{{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total-line">Total: &#8358;{{ total }}</p>
+    </div>
+
+    <!-- CHECKOUT FORM -->
+    <form method="POST" class="checkout-form">
+        {% csrf_token %}
+        <label for="full_name">Full Name</label>
+        <input type="text" name="full_name" id="full_name" placeholder="Enter your full name" required>
+
+        <label for="address">Delivery Address</label>
+        <textarea name="address" id="address" placeholder="Enter your delivery address" rows="3" required></textarea>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" name="phone" id="phone" placeholder="Enter your phone number" required>
+
+        <label for="payment_method">Payment Method</label>
+        <select name="payment_method" id="payment_method" required>
+            <option value="">Select Payment Method</option>
+            <option value="card">Card Payment</option>
+            <option value="transfer">Bank Transfer</option>
+            <option value="delivery">Pay on Delivery</option>
+        </select>
+
+        <button type="submit" class="checkout-btn">Confirm & Place Order</button>
+    </form>
+</div>
+
+{% endblock %}

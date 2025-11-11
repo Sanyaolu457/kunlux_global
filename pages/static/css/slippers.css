@@ -57,7 +57,10 @@ header{
 }
 }
 
-.header-container{
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
     padding: 0 15px;
     height: 100px;
@@ -65,25 +68,24 @@ header{
     border-bottom: 1px solid rgba(128, 128, 128, 0.507);
 }
 
-.kglobal{
+.kglobal {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   display: flex;
    font-family: "Poppins", sans-serif;
    line-height: 1.1;
    white-space: nowrap;
    width: 150px;  
 }
 
-.kglobal-main{
+.kglobal-main {
     font-size: 26px;
     font-weight: 700;
     letter-spacing: 2px;
     color: rgba(130, 26, 228, 0.651);
 }
 
-.kglobal-sub{
+.kglobal-sub {
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 4px;
@@ -92,16 +94,12 @@ header{
     margin-left: 40px;
 }
 
-.search-container{
+.search-container {
     position: relative;
     flex: 1;
-   
-   @media (max-width:480px) {
-      display: none;
-   } 
 }
 
-.search-container input{
+.search-container input {
     width: 100%;
     padding: 20px 10px 20px 8px;
     border: 1px solid #ccc;
@@ -113,51 +111,57 @@ header{
     border-color: rgba(89, 48, 128, 0.418);
 }
 
-.search-container input:focus{
+.search-container input:focus {
     outline: none;
     border: 1px solid black;
 }
 
-
-.search-container i{
+.search-container i {
     position: absolute;
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
     color: rgba(106, 32, 175, 0.918);
     font-size: 16px;
+    cursor: pointer;
 }
 
-.cart{
+.search-container .search-icon,
+.search-container .cancel-search {
+    display: none;
+}
+
+
+.cart {
    white-space: nowrap;
    margin-left: 10px;
    box-shadow: 3px 3px 4px #eee,
                -4px -4px 4px #eee; 
-   padding: 10px 30px 10px 30px;  
+   padding: 10px 30px;  
    font-size: 18px;
    font-weight: 400;
    color: rgba(117, 50, 179, 0.685);
    text-align: center;
 }
 
-.cart a{
+.cart a {
     font-size: 30px;
-    color: rgba(117, 50, 179, 0.685)
+    color: rgba(117, 50, 179, 0.685);
 }
 
-.profile{
+.profile {
    white-space: nowrap;
    margin-left: 10px;
    box-shadow: 3px 3px 4px #eee,
                -4px -4px 4px #eee; 
    text-align: center;
    cursor: pointer;
-  color: rgba(117, 50, 179, 0.685);
-  font-size: 28px;
-  border: 2px solid white;
-  border-radius: 50%;
-  padding: 6px 10px;
-  transition: background 0.3s, color 0.3s;
+   color: rgba(117, 50, 179, 0.685);
+   font-size: 28px;
+   border: 2px solid white;
+   border-radius: 50%;
+   padding: 6px 10px;
+   transition: background 0.3s, color 0.3s;
 }
 
 .user-menu {
@@ -180,8 +184,8 @@ header{
   box-shadow: 0 6px 15px rgba(0,0,0,0.4);
   display: none;
   flex-direction: column;
-  overflow: hidden;
-  z-index: 1000;
+  overflow: visible;
+  z-index: 2000;
 }
 
 .dropdown.show {
@@ -233,13 +237,96 @@ header{
 }
 
 .profile-box {
-      background: white;
-      padding: 40px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      border-radius: 12px;
+  background: white;
+  padding: 40px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .header-container{
+    overflow: visible;
+  }
+
+  .search-container input {
+    display: none;
+  }
+
+  .search-container .search-icon {
+    width: 80px;
+    display: block;
+    margin-left: 0;
+    font-size: 20px;
+    color: rgba(117, 50, 179, 0.8);
+  }
+
+  .search-container .cancel-search {
+    display: none;
+  }
+
+  .search-active .kglobal,
+  .search-active .cart,
+  .search-active .profile {
+    display: none;
+  }
+
+   .search-active .search-container {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 60px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    box-sizing: border-box;
+    z-index: 1000;
+  }
+
+  .search-active .search-container input {
+    display: block;
+    width: 100%;
+    padding: 20px 40px 20px 10px;
+    font-size: 16px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+  }
+
+  .search-active .search-container .search-icon {
+    display: none;
+  }
+
+  .search-active .search-container .cancel-search {
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+  }
+
+      .dropdown {
+        background-color: rgba(37, 19, 54, 0.98);
+        color: #fff; 
+        
     }
+
+    .dropdown a {
+        color: #fff; 
+    }
+
+    .dropdown a:hover {
+        background: blueviolet;
+        color: #fff;
+    }
+}
+
 
 .header3{
     margin-top: 0;

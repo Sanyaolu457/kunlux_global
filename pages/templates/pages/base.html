@@ -30,47 +30,50 @@
         </div>
 
         <div class="header-container">
-            <div class="kglobal">
-                <span class="kglobal-main">KUNLUX</span> 
-                <span class="kglobal-sub">GLOBAL</span>
-            </div>
+  <!-- LOGO -->
+  <div class="kglobal">
+    <span class="kglobal-main">KUNLUX</span>
+    <span class="kglobal-sub">GLOBAL</span>
+  </div>
 
-            <div class="search-container">
-                <input type="search" placeholder="search...">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+  <!-- SEARCH -->
+  <div class="search-container">
+    <input type="search" placeholder="search..." id="searchInput">
+    <i class="fa-solid fa-magnifying-glass search-icon" id="searchToggle"></i>
+    <i class="fa-solid fa-xmark cancel-search" id="cancelSearch"></i>
+  </div>
 
-            <div class="cart">
-                <a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i></a> 
-            </div>
+  <!-- CART -->
+  <div class="cart">
+    <a href="{% url 'cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+  </div>
 
-            {% if user.is_authenticated %}
-                <div class="profile user-menu">
-                <div class="user-icon" id="userIcon">
-                    <i class="fa-solid fa-user"></i>
-                </div>
+  <!-- PROFILE -->
+  {% if user.is_authenticated %}
+  <div class="profile user-menu">
+    <div class="user-icon" id="userIcon">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div class="dropdown" id="userDropdown">
+      <div class="dropdown-header">
+        <i class="fa-solid fa-user-circle"></i>
+        <span>Welcome, {{ user.username|title }}</span>
+      </div>
+      <hr>
+      <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
+      <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
+      <a href="{% url 'my_orders' %}"><i class="fa-solid fa-box"></i> Orders</a>
+      <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div>
+  </div>
+  {% else %}
+  <div class="profile">
+    <a href="{% url 'login' %}"><i class="fa-solid fa-user"></i></a>
+  </div>
+  {% endif %}
+</div>
 
-                <div class="dropdown" id="userDropdown">
-                    <div class="dropdown-header">
-                    <i class="fa-solid fa-user-circle"></i>
-                    <span>Welcome, {{ user.username|title }}</span>
-                    </div>
-                    <hr>
-                    <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-                    <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
-                    <a href="#"><i class="fa-solid fa-box"></i> Orders</a>
-                    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
-                    <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                </div>
-                </div>
-            {% else %}
-                <div class="profile">
-                <a href="{% url 'login' %}"><i class="fa-solid fa-user"></i></a>
-                </div>
-            {% endif %}
-
-
-        </div>
 
         <div class="header3">
             <div class="product-category">
@@ -87,7 +90,7 @@
                     <li><a href="{% url 'pages_home' %}"  class="{% if request.resolver_match.url_name == 'pages_home' %}active{% endif %}">Home</a></li>
                     <li><a href="{% url 'pages_about' %}"  class="{% if request.resolver_match.url_name == 'pages_about' %}active{% endif %}">About</a></li>
                     <li><a href="{% url 'pages_newarrivals' %}"  class="{% if request.resolver_match.url_name == 'pages_newarrivals' %}active{% endif %}">New Arrivals</a></li>
-                    <li><a href="#">All Products</a></li>
+                    <li><a href="{% url 'product_Cate' %}">All Products</a></li>
                     <li><a href="{% url 'pages_contact' %}" class="{% if request.resolver_match.url_name == 'pages_contact' %}active{% endif %}">Contact</a></li>
                 </ul>
             </div>
@@ -193,6 +196,20 @@
             }
         });
         });
+
+        
+        const header = document.querySelector('.header-container');
+        const searchToggle = document.getElementById('searchToggle');
+        const cancelSearch = document.getElementById('cancelSearch');
+
+        searchToggle.addEventListener('click', () => {
+            header.classList.add('search-active');
+        });
+
+        cancelSearch.addEventListener('click', () => {
+            header.classList.remove('search-active');
+        });
+
    </script>
 </body>
 </html>

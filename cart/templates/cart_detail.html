@@ -68,7 +68,7 @@
 
 .checkout-btn {
     display: block;
-    width: 200px;
+    width: 220px;
     text-align: center;
     background: #9b59b6;
     color: white;
@@ -99,32 +99,83 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
-.message.success {
-    background: #28a745;
-    color: white;
-}
-
-.message.info {
-    background: #007bff;
-    color: white;
-}
-
-.message.warning {
-    background: #ffc107;
-    color: #222;
-}
-
-.message.error {
-    background: #dc3545;
-    color: white;
-}
+.message.success { background: #28a745; color: white; }
+.message.info { background: #007bff; color: white; }
+.message.warning { background: #ffc107; color: #222; }
+.message.error { background: #dc3545; color: white; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-</style>
 
+/* ===========================
+   ✅ Responsive Styles
+=========================== */
+@media (max-width: 768px) {
+    .cart-container {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+
+    .cart-container h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    /* Hide table headers */
+    .cart-table thead {
+        display: none;
+    }
+
+    /* Convert each row to a card */
+    .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-table tr {
+        background: rgba(255,255,255,0.08);
+        margin-bottom: 15px;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .cart-table td {
+        border: none;
+        padding: 8px 0;
+        text-align: right;
+        position: relative;
+    }
+
+    .cart-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        color: #ffb347;
+        text-transform: uppercase;
+    }
+
+    .cart-table img {
+        width: 60px;
+        height: 60px;
+        margin-top: 5px;
+    }
+
+    .cart-total {
+        text-align: center;
+        font-size: 1.2em;
+        margin-top: 15px;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        margin-top: 25px;
+    }
+}
+</style>
 
 {% if messages %}
 <div class="messages">
@@ -137,7 +188,7 @@
 <div class="cart-container">
     <h2>Your Shopping Cart</h2>
 
-    {% if products %}
+    {% if cart_items %}
     <table class="cart-table">
         <thead>
             <tr>
@@ -150,14 +201,14 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in products %}
+            {% for item in cart_items %}
             <tr>
-                <td>{{ item.product.name }}</td>
-                <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"></td>
-                <td>&#8358;{{ item.product.price }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>&#8358;{{ item.subtotal }}</td>
-                <td class="cart-actions">
+                <td data-label="Product">{{ item.product.name }}</td>
+                <td data-label="Image"><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"></td>
+                <td data-label="Price">&#8358;{{ item.product.price }}</td>
+                <td data-label="Qty">{{ item.quantity }}</td>
+                <td data-label="Subtotal">&#8358;{{ item.get_subtotal }}</td>
+                <td data-label="Action" class="cart-actions">
                     <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
                 </td>
             </tr>
@@ -167,7 +218,7 @@
 
     <p class="cart-total"><strong>Total: </strong>&#8358;{{ total }}</p>
 
-    <a href="#" class="checkout-btn">Proceed to Checkout</a>
+    <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
     {% else %}
     <p style="text-align:center; font-size:18px;">Your cart is empty.</p>
     {% endif %}
